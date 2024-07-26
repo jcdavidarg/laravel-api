@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('category_id'); //   PARA HACER REFERENCIA A LA QUE VA A HACER LA RELACION
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); // CREO LA RELACION
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->string('title');
+            $table->text('description');
+            $table->text('ingredients');
+            $table->text('instructions');
+            $table->string('image')->nullable();
+
             $table->timestamps();
         });
     }
